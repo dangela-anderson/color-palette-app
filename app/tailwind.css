@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+    outline: none;
+}
+
+.custom-color-picker .react-colorful {
+    width: 100%
+}
