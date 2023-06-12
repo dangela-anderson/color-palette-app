@@ -59,6 +59,7 @@ export async function requireUserId(request: Request, redirectTo: string = new U
         where: { id: userId },
         select: { id: true, username: true, firstName: true, lastName: true, palettes: {
           select: {
+            id: true,
             title: true,
             colors: true
           }

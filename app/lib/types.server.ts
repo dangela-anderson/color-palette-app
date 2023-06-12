@@ -17,7 +17,7 @@ export type GuestLoginForm = {
 }
 
 export type PaletteWithColors = Exclude<Palette, "userId"> & {
-    colors: Exclude<Color[], "paletteId">
+    colors: Exclude<Color, "paletteId">[]
 }
 
 export type UserWithPalettes =  Exclude<User, "password"> & {

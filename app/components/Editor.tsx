@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AdjustmentsHorizontalIcon, ArrowUpOnSquareIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon, ArrowUpOnSquareIcon, PlusIcon, CheckIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { v4 as uuidv4 } from "uuid";
 import { Form, Link } from "@remix-run/react";
@@ -114,7 +114,7 @@ export default function Editor({ palette }: EditorProps) {
               >
                 <ArrowUpOnSquareIcon className="h-5 w-5" aria-hidden="true"/>
               </button>
-              <button type="submit" className="inline-flex gap-x-2 items-center rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white hover:text-white hover:bg-sky-400">
+              <button type="submit"  name="action" value="submit" className="inline-flex gap-x-2 items-center rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white hover:text-white hover:bg-sky-400">
                 <CheckIcon className="stroke-2 w-5 h-5" aria-hidden="true"/>
                 <p>{ palette ? "Save" : "Create" }</p>
               </button>

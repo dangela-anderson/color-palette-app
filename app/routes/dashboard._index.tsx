@@ -2,11 +2,12 @@ import type { ActionFunction, LoaderArgs, V2_MetaFunction } from "@remix-run/nod
 
 import { Form, Link, useLoaderData } from "@remix-run/react"
 import Logo from "../../public/images/logo.png"
-import { LoaderFunction, json } from "@remix-run/node"
+import { LoaderFunction, json, redirect } from "@remix-run/node"
 import { getUser, logout } from "~/lib/auth.server"
 import type { PaletteWithColors, UserWithPalettes } from "~/lib/types.server";
 import { Palette } from "@prisma/client";
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { prisma } from "~/lib/prisma.server";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -20,6 +21,13 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export const action: ActionFunction = async ({ request }: LoaderArgs) => {
+    const form = await request.formData()
+    const paletteId = form.get("paletteToDelete")
+    if (paletteId) {
+        const palette = await prisma.palette.delete({ where: { id: paletteId as string}})
+        return palette ? redirect("/dashboard") : null
+    }
+
     return await logout(request)
 }
 
@@ -46,28 +54,41 @@ export default function Index() {
                     </div>
                 </nav>
             </header>
-            <main className="flex flex-col flex-1 w-full items-center justify-start min-w-lg mt-10 px-10">
+            <Form method="delete" className="flex flex-col flex-1 w-full items-center justify-start min-w-lg mt-10 px-10">
                 <h1 className="font-semibold text-2xl">Palettes</h1>
-                <ul className="mt-20">
+                <ul className={`${ user.palettes.length ? "grid grid-cols-3 gap-x-4 gap-y-4": "flex items-center justify-center"} mt-20`}>
                     {   user.palettes.length ?
                         user.palettes.map((palette: PaletteWithColors) => {
                             return (
-                                <li className="flex min-w-md flex-col bg-white h-32 border border-slate-300 shadow-md rounded-md shadow-sm p-4">
-                                    { palette.title }
-                                    <div className="flex min-w-sm">
+                                <li className="flex flex-col w-64 max-w-sm lg:max-w-md h-full bg-white flex min-w-md border border-slate-300 shadow-md rounded-md shadow-sm p-4">
+                                    <div className="grow flex min-w-sm">
                                     {
                                         palette.colors.map((color) => {
                                             return <div className="grow w-8 h-10" style={{backgroundColor: color.value}} key={color.id}></div>
                                         })
                                     }
                                     </div>
+                                    <div className="flex justify-between items-center min-w-sm mt-2">
+                                        <Link className="w-full h-full" to={`/palettes/${palette.id}`}>
+                                            <h1 className="font-semibold">{ palette.title }</h1>
+                                        </Link>
+                                        <button
+                                            type="submit"
+                                            name="paletteToDelete"
+                                            value={palette.id}
+                                            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-slate-300 border hover:bg-slate-50 border-slate-200 hover:bg-sky-500"
+                                        >
+                                            <TrashIcon className="h-5 w-5" aria-hidden="true"/>
+                                        </button>
+                                    </div>
+                                    <span className="font-semibold text-xs">{ palette.colors.length} Colors</span>
                                 </li>
                             )
                         })
                         : <h1 className="font-semibold text-xl text-slate-700">Nothing to see yet!</h1>
                     }
                 </ul>
-            </main>
+            </Form>
         </div>
     )
 }
