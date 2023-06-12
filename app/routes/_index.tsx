@@ -14,7 +14,7 @@ export const meta: V2_MetaFunction = () => {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  return (await getUser(request)) ? redirect("/") : null
+  return (await getUser(request)) ? redirect("/dashboard") : null
 }
 
 export const action: ActionFunction = async ({ request }: LoaderArgs) => {
