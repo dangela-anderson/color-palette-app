@@ -1,11 +1,18 @@
 
-import { ActionFunction, LoaderFunction, json, redirect } from "@remix-run/node"
+import { ActionFunction, LoaderFunction, V2_MetaFunction, json, redirect } from "@remix-run/node"
 import { validateUsername } from "~/lib/validators.server"
 import { getUser, guestLogin } from "~/lib/auth.server"
 import { Form, Link, useActionData } from "@remix-run/react"
 import Logo from "../../public/images/logo.png"
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline"
 import { useRef, useEffect, useState } from "react"
+
+
+export const meta: V2_MetaFunction = () => {
+    return [
+      { title: "Swatched - Guest Login" },
+    ];
+};
 
 export const loader: LoaderFunction = async ({ request }) => {
     return (await getUser(request)) ? redirect("/dashboard") : null

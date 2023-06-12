@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AdjustmentsHorizontalIcon, ArrowUpOnSquareIcon, PlusIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 import EditorModal from "./modal/EditorModal";
 import { EditorColor, EditorPalette } from "~/lib/types.server";
 import ExportModal from "./modal/ExportModal";
@@ -78,7 +78,7 @@ export default function Editor({ palette }: EditorProps) {
   }, [openEditor])
 
   return (
-    <div className="fixed top-0 inset-0 flex flex-col min-h-full">
+    <Form method="post" className="fixed top-0 inset-0 flex flex-col min-h-full">
       <nav className="sticky top-0 z-40 border-b border-slate-900/10">
         <div className="mx-auto max-w-8xl px-2 sm:px-3 lg:px-4">
           <div className="flex w-full h-14 items-center justify-between">
@@ -89,7 +89,9 @@ export default function Editor({ palette }: EditorProps) {
                 <HomeIcon className="h-5 w-5" aria-hidden="true"/>
               </Link>
               <input
+                id="title"
                 type="text"
+                name="title"
                 className="border text-slate-500 rounded-md border-slate-200 px-2 ml-4"
                 defaultValue={editedPalette.title}
                 onChange={(event) => onTitleChange(event.target.value)}
@@ -112,9 +114,9 @@ export default function Editor({ palette }: EditorProps) {
               >
                 <ArrowUpOnSquareIcon className="h-5 w-5" aria-hidden="true"/>
               </button>
-              <button className="inline-flex gap-x-2 items-center rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white hover:text-white hover:bg-sky-400" type="submit">
+              <button type="submit" className="inline-flex gap-x-2 items-center rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white hover:text-white hover:bg-sky-400">
                 <CheckIcon className="stroke-2 w-5 h-5" aria-hidden="true"/>
-                <p>{ palette ? "Create" : "Save"}</p>
+                <p>{ palette ? "Save" : "Create" }</p>
               </button>
             </div>
           </div>
@@ -126,9 +128,11 @@ export default function Editor({ palette }: EditorProps) {
             editedPalette.colors.map((color) => {
                 return (
                   <div className="grow h-24 md:h-32" style={{backgroundColor: color.value}} key={color.id}>
+                    <input type="hidden" name="color" value={`${color.name  + ":" + color.value}`}></input>
                     <div className="h-full group">
                       <li className={`h-full group-hover:bg-black group-hover:bg-opacity-70 transition-all duration-200 ${editedColor && color.id === editedColor.id && "bg-slate-500 bg-opacity-50"}`}>
                         <button 
+                          type="button"
                           className="w-1/4 mx-auto grid place-content-center h-full w-full text-white"
                           onClick={() => setEditedColor(color)}
                         >
@@ -161,6 +165,6 @@ export default function Editor({ palette }: EditorProps) {
 
         }
       </main>
-    </div>
+    </Form>
   )
 }

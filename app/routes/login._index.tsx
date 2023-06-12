@@ -1,10 +1,15 @@
 import { Form, Link, useActionData } from "@remix-run/react";
 import Logo from "../../public/images/logo.png";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
-import { ActionFunction, LoaderArgs, LoaderFunction, json, redirect } from "@remix-run/node";
+import { ActionFunction, LoaderArgs, LoaderFunction, V2_MetaFunction, json, redirect } from "@remix-run/node";
 import { getUser, login } from "~/lib/auth.server";
 import { useRef, useEffect, useState } from "react";
 
+export const meta: V2_MetaFunction = () => {
+    return [
+      { title: "Swatched - Login" },
+    ];
+};
 
 export const loader: LoaderFunction = async ({ request }) => {
     return (await getUser(request)) ? redirect("/dashboard") : null

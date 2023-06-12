@@ -1,4 +1,4 @@
-import { Palette, User } from "@prisma/client"
+import { Color, Palette, User } from "@prisma/client"
 
 export interface EditorPalette extends Pick<Palette, "title"> {
     id?: string
@@ -16,6 +16,10 @@ export type GuestLoginForm = {
     username: string 
 }
 
+export type PaletteWithColors = Exclude<Palette, "userId"> & {
+    colors: Exclude<Color[], "paletteId">
+}
+
 export type UserWithPalettes =  Exclude<User, "password"> & {
     palettes: Palette[]
 }
@@ -30,4 +34,4 @@ export type RegisterForm = {
 export type LoginForm = {
     username: string
     password: string
-  }
+}

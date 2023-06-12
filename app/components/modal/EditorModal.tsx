@@ -76,8 +76,10 @@ export default function EditorModal({
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all w-full max-w-sm sm:max-w-md pt-10">
                   <div className="flex flex-col items-center justify-center px-10">
                     <Dialog.Title as="h3" className="flex gap-3 w-full text-base text-slate-700 leading-6">
-                      <input onChange={(event) => setName(event.target.value)} defaultValue={name} className="w-full text-slate-500 border border-slate-200 px-2 py-1 rounded-md" type="text" />
+                      <input onChange={(event) => { setName(event.target.value) }}
+                        defaultValue={name.trim().length ? name : "Untitled Color"} className="w-full text-slate-500 border border-slate-200 px-2 py-1 rounded-md" type="text" />
                       <button 
+                        type="button"
                         className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-slate-300 border border-slate-200 hover:text-white hover:bg-red-500"
                         onClick={() => {
                           onDeleteClicked()

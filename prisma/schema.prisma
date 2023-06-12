@@ -24,7 +24,7 @@ model Palette {
   title  String
   colors Color[]
   user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String  @unique
+  userId String  
 }
 
 model Color {
@@ -32,5 +32,5 @@ model Color {
   name      String
   value     String
   palette   Palette @relation(fields: [paletteId], references: [id], onDelete: Cascade)
-  paletteId String  @unique
+  paletteId String
 }

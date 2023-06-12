@@ -57,7 +57,12 @@ export async function requireUserId(request: Request, redirectTo: string = new U
     try {
       const user = await prisma.user.findUnique({
         where: { id: userId },
-        select: { id: true, username: true, firstName: true, lastName: true, palettes: true },
+        select: { id: true, username: true, firstName: true, lastName: true, palettes: {
+          select: {
+            title: true,
+            colors: true
+          }
+        }},
       })
       return user
     } catch {
