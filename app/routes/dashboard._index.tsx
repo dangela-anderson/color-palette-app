@@ -60,7 +60,7 @@ export default function Index() {
                     {   user.palettes.length ?
                         user.palettes.map((palette: PaletteWithColors) => {
                             return (
-                                <li className="flex flex-col w-64 max-w-sm lg:max-w-md h-full bg-white flex min-w-md border border-slate-300 shadow-md rounded-md shadow-sm p-4">
+                                <li key={palette.id} className="flex flex-col w-64 max-w-sm lg:max-w-md h-full bg-white flex min-w-md border border-slate-300 shadow-md rounded-md shadow-sm p-4">
                                     <div className="grow flex min-w-sm">
                                     {
                                         palette.colors.map((color) => {

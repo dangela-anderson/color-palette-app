@@ -26,18 +26,21 @@ export const action: ActionFunction = async ({ request }: LoaderArgs) => {
   if (typeof title !== 'string') {
     return json({ error: `Invalid Form Data` }, { status: 400 })
   }
+  
+  if (colors.length) {
+    const palette = await prisma.palette.create({
+      data: {
+        title: title as string, 
+        colors: { createMany: {
+          data: colors
+        }},
+        userId: user.id
+      }
+    })
+    return palette
+  }
 
-  const palette = await prisma.palette.create({
-    data: {
-      title: title as string,
-      colors: { createMany: {
-        data: colors
-      }},
-      userId: user.id
-    }
-  })
-
-  return  palette ? redirect("/dashboard") : null
+  return redirect("/dashboard")
 }
 
 

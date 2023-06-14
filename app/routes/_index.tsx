@@ -74,7 +74,7 @@ export default function Index() {
       <main className="flex flex-col flex-1 w-full items-center justify-center">
         <div className="flex flex-col items-center justify-center text-center mt-20 px-10">
           <h1 className="text-3xl md:text-5xl max-w-xl font-bold text-[#073442]">Create your next palette with Swatched</h1>
-          <h2 className="text-xs md:text-sm mt-4 font-semibold text-[#073442]">Join today for a simple, user-friendly to create beautiful palettes.</h2>
+          <h2 className="text-xs md:text-sm mt-4 font-semibold text-[#073442]">Join today for a simple, user-friendly way to create beautiful palettes.</h2>
           <Link to="/create" className="justify-self-start font-semibold rounded-md px-3 py-2 text-white bg-sky-500 hover:bg-sky-300 mt-4 shadow-sm">Create now</Link>
         </div>
         <Form method="post" className="w-full max-w-md md:max-w-xl border mx-auto px-10 py-14 bg-white rounded-md mt-10">
