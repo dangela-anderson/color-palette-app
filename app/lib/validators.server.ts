@@ -1,5 +1,5 @@
 export const validateUsername = (username: string): string | undefined => {
-    if (username.length < 5) {
+    if (username.length < 3) {
         return "Please enter a username that is at least 5 characters long"
     }
 
