@@ -1,6 +1,6 @@
 export const validateUsername = (username: string): string | undefined => {
     if (username.length < 3) {
-        return "Please enter a username that is at least 5 characters long"
+        return "Please enter a username that is at least 3 characters long"
     }
 
     var validRegex = /a-zA-Z0-9]+$/
