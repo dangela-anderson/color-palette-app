@@ -88,13 +88,13 @@ export default function Index() {
 
               <label className="flex flex-col gap-2 mt-4" htmlFor="firstName">
                   <h3 className="font-semibold text-[#073442]">First Name</h3>
-                  <input defaultValue={formData.firstName} className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="text" placeholder="First Name" name="firstName" id="firstName" />
+                  <input required minLength={1} defaultValue={formData.firstName} className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="text" placeholder="First Name" name="firstName" id="firstName" />
                   { errors.firstName && <p className="text-xs text-red-500">{ errors.firstName }</p>}
               </label>
 
               <label className="flex flex-col gap-2 mt-4" htmlFor="lastName">
                   <h3 className="font-semibold text-[#073442]">Last Name</h3>
-                  <input defaultValue={formData.lastName} className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="text" placeholder="Last Name" name="lastName" id="lastName" />
+                  <input required minLength={1} defaultValue={formData.lastName} className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="text" placeholder="Last Name" name="lastName" id="lastName" />
                   { errors.lastName && <p className="text-xs text-red-500">{ errors.lastName }</p>}
               </label>
             
@@ -102,13 +102,13 @@ export default function Index() {
 
             <label className="flex flex-col gap-2 mt-4" htmlFor="username">
               <h3 className="font-semibold text-[#073442]">Username</h3>
-              <input defaultValue={formData.username} className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="text" placeholder="Username" name="username" id="username" />
+              <input required minLength={3} defaultValue={formData.username} className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="text" placeholder="Username" name="username" id="username" />
               <p className="text-xs text-red-500">{ errors.username }</p>
             </label>
 
             <label className="flex flex-col gap-2 mt-4" htmlFor="password">
               <h3 className="font-semibold text-[#073442]">Password</h3>
-              <input defaultValue={formData.password} className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="password" placeholder="Password" name="password" id="password" />
+              <input required minLength={8} defaultValue={formData.password} className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="password" placeholder="Password" name="password" id="password" />
               { errors.password && <p className="text-xs text-red-500">{ errors.password }</p>}
             </label>
 

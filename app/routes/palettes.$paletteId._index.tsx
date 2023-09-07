@@ -28,12 +28,6 @@ export const action: ActionFunction = async ({ request, params }: ActionArgs) =>
             const palette = await prisma.palette.delete({ where: { id: paletteId}})
             return palette ? redirect("/dashboad") : null
         }
-
-        case "submit": {
-            const title = form.get("title")
-            const colors = form.get("color")
-            console.log(title, colors)
-        }
     }
 }
 
@@ -42,6 +36,6 @@ export const action: ActionFunction = async ({ request, params }: ActionArgs) =>
 export default function PalettePage() {
     const palette: EditorPalette = useLoaderData<typeof loader>()
     return (
-        <Editor palette={palette}/>
+        <Editor palette={palette} userId={palette.userId}/>
     )
 }

@@ -104,7 +104,7 @@ export async function register(user: RegisterForm) {
 export async function guestLogin(user: GuestLoginForm) {
     const exists = await prisma.user.count({ where: { username: user.username } })
     if (exists) {
-      return json({ error: `User already exists with that username` }, { status: 400 })
+      return json({ error: `User already exists with that username` })
     }
 
     const newGuestUser = await createGuestUser(user)
@@ -114,8 +114,7 @@ export async function guestLogin(user: GuestLoginForm) {
         {
           error: `Something went wrong trying to create a new user.`,
           fields: { username: user.username },
-        },
-        { status: 400 },
+        }
       )
     }
   

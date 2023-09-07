@@ -9,9 +9,10 @@ import ExportModal from "./modal/ExportModal";
 
 interface EditorProps {
   palette: EditorPalette | undefined
+  userId: string | undefined
 }
 
-export default function Editor({ palette }: EditorProps) {
+export default function Editor({ palette, userId }: EditorProps) {
   const [editedPalette, setEditedPalette] = useState<EditorPalette>(palette ?? 
     {
       title: "Untitled Palette",
@@ -114,10 +115,12 @@ export default function Editor({ palette }: EditorProps) {
               >
                 <ArrowUpOnSquareIcon className="h-5 w-5" aria-hidden="true"/>
               </button>
-              <button type="submit"  name="action" value="submit" className="inline-flex gap-x-2 items-center rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white hover:text-white hover:bg-sky-400">
-                <CheckIcon className="stroke-2 w-5 h-5" aria-hidden="true"/>
-                <p>{ palette ? "Save" : "Create" }</p>
-              </button>
+              { !palette && userId &&
+                <button type="submit" name="action" value="submit" className="inline-flex gap-x-2 items-center rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white hover:text-white hover:bg-sky-400">
+                  <CheckIcon className="stroke-2 w-5 h-5" aria-hidden="true"/>
+                  <p>Create</p>
+                </button>
+              }
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
-import { ActionFunction, LoaderArgs, V2_MetaFunction, json, redirect } from "@remix-run/node";
+import { ActionFunction, LoaderArgs, LoaderFunction, V2_MetaFunction, json, redirect } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import Editor from "~/components/Editor";
 import { getUser } from "~/lib/auth.server";
 import { prisma } from "~/lib/prisma.server";
@@ -8,6 +9,11 @@ export const meta: V2_MetaFunction = () => {
     { title: "Swatched - Home" },
   ];
 };
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request)
+  return user ? json(user) : null
+}
 
 export const action: ActionFunction = async ({ request }: LoaderArgs) => {
   const user = await getUser(request)
@@ -37,7 +43,6 @@ export const action: ActionFunction = async ({ request }: LoaderArgs) => {
         userId: user.id
       }
     })
-    return palette
   }
 
   return redirect("/dashboard")
@@ -45,7 +50,8 @@ export const action: ActionFunction = async ({ request }: LoaderArgs) => {
 
 
 export default function Create() {
+  const user = useLoaderData()
   return (
-    <Editor palette={undefined}/>
+    <Editor palette={undefined} userId={user ? user.id : undefined}/>
   )
 }

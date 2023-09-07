@@ -80,11 +80,11 @@ export default function Login() {
                     </div>
                     <label className="flex flex-col gap-2 mt-4" htmlFor="username">
                         <h3 className="font-semibold text-[#073442]">Username</h3>
-                        <input className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="username" placeholder="Username" name="username" id="username" />
+                        <input required className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="username" placeholder="Username" name="username" id="username" />
                     </label>
                     <label className="flex flex-col gap-2 mt-4" htmlFor="password">
                         <h3 className="font-semibold text-[#073442]">Password</h3>
-                        <input className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="password" placeholder="Password" name="password" id="password" />
+                        <input required className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="password" placeholder="Password" name="password" id="password" />
                     </label>
                     <h1 className="text-xs text-[#073442] mt-3">Don't have an account? <Link className="underline text-sky-500" to="/">Sign up</Link></h1>
                     <input className="w-full font-semibold rounded-md px-3 py-3 text-white bg-sky-500 hover:bg-sky-300 shadow-sm mt-4" type="submit" value="Continue" />

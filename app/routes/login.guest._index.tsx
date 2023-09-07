@@ -89,8 +89,8 @@ export default function GuestLogin() {
                     </div>
                     <label className="flex flex-col gap-2 mt-4" htmlFor="username">
                         <h3 className="font-semibold text-[#073442]">Username</h3>
-                        <input className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="username" placeholder="Username Addresss" name="username" id="username" />
-                        { errors.firstName && <p className="text-xs text-red-500">{ errors.firstName }</p>}
+                        <input className="w-full border border-slate-200 shadow-sm rounded-md px-3 py-2" type="username" placeholder="Username" name="username" id="username" required/>
+                        { errors.username && <p className="text-xs text-red-500">{ errors.username }</p>}
                     </label>
                     <h1 className="text-xs text-[#073442] mt-3">Already have an account? <Link className="underline text-sky-500" to="/login">Log In</Link></h1>
                     <input className="w-full font-semibold rounded-md px-3 py-3 text-white bg-sky-500 hover:bg-sky-300 shadow-sm mt-4" type="submit" value="Continue as guest" />
